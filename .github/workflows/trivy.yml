@@ -12,6 +12,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: Test third party action: Hello World
+        uses: actions/hello-world-javascript@v1  
 
       - name: Build Docker image
         run: docker build -t sample-app:vuln ./sample-app

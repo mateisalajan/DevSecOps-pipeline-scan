@@ -17,7 +17,7 @@ jobs:
         run: docker build -t sample-app:vuln ./sample-app
 
       - name: Run Trivy vulnerability scanner
-        uses: aquasecurity/trivy-action@v0.13.2
+        uses: aquasecurity/trivy-action@v0.13
         with:
           image-ref: sample-app:vuln
           format: 'table'

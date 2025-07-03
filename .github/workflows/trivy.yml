@@ -13,7 +13,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Test third-party action:Hello World
+      - name: Test third-party action: Hello World
         uses: actions/hello-world-javascript-action@v1
 
       - name: Set up Docker Buildx
@@ -22,13 +22,13 @@ jobs:
       - name: Build Docker image
         run: docker build -t sample-app:vuln ./sample-app
 
-      - name: Install Trivy
+      - name: Install Trivy (latest)
         run: |
-          wget https://github.com/aquasecurity/trivy/releases/latest/download/trivy_0.51.1_Linux-64bit.deb
-          sudo dpkg -i trivy_0.51.1_Linux-64bit.deb
+          LATEST=$(wget -qO- https://api.github.com/repos/aquasecurity/trivy/releases/latest | grep "tag_name" | cut -d '"' -f 4 | sed 's/^v//')
+          wget "https://github.com/aquasecurity/trivy/releases/download/v${LATEST}/trivy_${LATEST}_Linux-64bit.deb"
+          sudo dpkg -i trivy_${LATEST}_Linux-64bit.deb
 
       - name: Run Trivy scan
         run: |
           trivy --version
           trivy image sample-app:vuln --severity CRITICAL,HIGH --exit-code 1
-

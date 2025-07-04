@@ -1,4 +1,5 @@
 ![Trivy Scan](https://github.com/mateisalajan/DevSecOps-pipeline-scan/actions/workflows/trivy.yml/badge.svg?branch=main)
+
 sample-app:vuln (alpine 3.14.6)
 ===============================
 

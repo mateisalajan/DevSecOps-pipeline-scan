@@ -29,17 +29,14 @@ This project demonstrates a secure, automated CI/CD pipeline for containerized P
 ### Setup Steps
 
 1. **Clone the repo:**
-   ```bash
+   
    git clone https://github.com/mateisalajan/DevSecOps-pipeline-scan.git
    cd DevSecOps-pipeline-scan
-````
 
 2. **Build and run locally:**
 
-   ```bash
    docker build -t sample-app:vuln ./sample-app
    docker run -p 5000:5000 sample-app:vuln
-   ```
 
    Visit [http://localhost:5000](http://localhost:5000) to view the app.
 

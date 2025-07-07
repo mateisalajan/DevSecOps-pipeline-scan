@@ -1,0 +1,12 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRequireImageLabel
+metadata:
+  name: require-image-label
+spec:
+  parameters:
+    label: ":secure"   # Require images to contain ":secure" in their tag
+  match:
+    kinds:
+      - apiGroups: [""]
+        kinds: ["Pod"]
+

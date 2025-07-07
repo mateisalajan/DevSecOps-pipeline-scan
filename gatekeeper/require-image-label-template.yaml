@@ -1,0 +1,25 @@
+apiVersion: templates.gatekeeper.sh/v1beta1
+kind: ConstraintTemplate
+metadata:
+  name: k8srequireimagelabel
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sRequireImageLabel
+      validation:
+        openAPIV3Schema:
+          properties:
+            label:
+              type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8srequireimagelabel
+
+        violation[{"msg": msg}] {
+          container := input.review.object.spec.containers[_]
+          not contains(container.image, input.parameters.label)
+          msg := sprintf("Container image %v is missing required label: %v", [container.image, input.parameters.label])
+        }
+
